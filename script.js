@@ -18,17 +18,27 @@ function addItem(e){
     var email = document.getElementById('item2').value;
     // Get contact number input value
     var number = document.getElementById('item3').value;
-    // Check if there is existing data in local storage
+
     var existingData = localStorage.getItem('personsData');
 
-    // If no data exists, create an empty string
-    var personsData = existingData ? existingData : '';
+    var personsData = existingData ? JSON.parse(existingData) : [];
 
-    // Add the new person's information to the string
-    var newPerson = name + ';' + email + ';' + number ;
-    personsData += newPerson;
+    // Create an object to represent the new person
+    var newPerson = {
+      name: name,
+      email: email,
+      number: number
+    };
+  
+    // Add the new person's information to the array
+    personsData.push(newPerson);
   
     // Save the updated array back to local storage
-    localStorage.setItem('personsData',personsData);
+    localStorage.setItem('personsData', JSON.stringify(personsData));
+  
+    // Clear input fields for the next entry
+    document.getElementById('item1').value = '';
+    document.getElementById('item2').value = '';
+    document.getElementById('item3').value = '';
+}
 
-}     
