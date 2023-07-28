@@ -6,9 +6,13 @@ body.style.borderColor="black";
 var btn = document.getElementById("button");
 btn.style.marginTop ="15px";
 
+var itemlist = document.getElementById('Add item');
+
 var form = document.getElementById('addForm');
 // Form submit event
 form.addEventListener('submit', addItem);
+//Delete Event
+itemlist.addEventListener('click',removeitm);
 // Add item
 function addItem(e){
     e.preventDefault();
@@ -18,6 +22,22 @@ function addItem(e){
     var email = document.getElementById('item2').value;
     // Get contact number input value
     var number = document.getElementById('item3').value;
+    // creating an empty li
+    var li = document.createElement('li');
+    // Get user's details
+    var itms = name+'-'+email+ '-' +number+' ' ;
+    //Append in li 
+    li.appendChild(document.createTextNode(itms));
+
+    //Create a delete button
+    var delbtn = document.createElement('button');
+    //append text node
+    delbtn.appendChild(document.createTextNode('DELETE'));
+    //add btn to li
+    li.appendChild(delbtn);
+
+    //Append in ul cointaing id-Add items
+    itemlist.appendChild(li);
 
     // Create an object to represent the new person
     var newPerson = {
@@ -25,6 +45,7 @@ function addItem(e){
       email: email,
       number: number
     };
+    
   
     // Save the updated array back to local storage
     localStorage.setItem(email,JSON.stringify (newPerson));
@@ -34,5 +55,19 @@ function addItem(e){
     document.getElementById('item2').value = '';
     document.getElementById('item3').value = '';
 }
+  function removeitm(e){
+    if(e.target.textContent === 'DELETE'){
+      var li= e.target.parentElement;
+      // Get the text content of the li element
+      var itemText = li.textContent.trim(); 
+
+      // Extract the email from the text content
+      var email = itemText.split('-')[1].trim();
+    
+      // Remove the item from the local storage
+      localStorage.removeItem(email);
+      itemlist.removeChild(li);
+    }
+  }
 
  
