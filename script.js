@@ -19,10 +19,6 @@ function addItem(e){
     // Get contact number input value
     var number = document.getElementById('item3').value;
 
-    var existingData = localStorage.getItem('personsData');
-
-    var personsData = existingData ? JSON.parse(existingData) : [];
-
     // Create an object to represent the new person
     var newPerson = {
       name: name,
@@ -30,11 +26,8 @@ function addItem(e){
       number: number
     };
   
-    // Add the new person's information to the array
-    personsData.push(newPerson);
-  
     // Save the updated array back to local storage
-    localStorage.setItem('personsData', JSON.stringify(personsData));
+    localStorage.setItem(email,JSON.stringify (newPerson));
   
     // Clear input fields for the next entry
     document.getElementById('item1').value = '';
@@ -42,3 +35,4 @@ function addItem(e){
     document.getElementById('item3').value = '';
 }
 
+ 
