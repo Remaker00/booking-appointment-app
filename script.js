@@ -17,7 +17,7 @@ itemlist.addEventListener('click',removeitm);
 function addItem(e){
     e.preventDefault();
     // Get username input value
-    var name = document.getElementById('item1').value;
+    var Name = document.getElementById('item1').value;
     // Get email input value
     var email = document.getElementById('item2').value;
     // Get contact number input value
@@ -25,7 +25,7 @@ function addItem(e){
     // creating an empty li
     var li = document.createElement('li');
     // Get user's details
-    var itms = name+'-'+email+ '-' +number+' ' ;
+    var itms = Name+'-'+email+ '-' +number+' ' ;
     //Append in li 
     li.appendChild(document.createTextNode(itms));
 
@@ -36,12 +36,19 @@ function addItem(e){
     //add btn to li
     li.appendChild(delbtn);
 
+    //Create a edit button
+    var edtbtn = document.createElement('button');
+    //append text node
+    edtbtn.appendChild(document.createTextNode('EDIT'));
+    //add btn to li
+    li.appendChild(edtbtn);
+
     //Append in ul cointaing id-Add items
     itemlist.appendChild(li);
 
     // Create an object to represent the new person
     var newPerson = {
-      name: name,
+      name: Name,
       email: email,
       number: number
     };
@@ -54,9 +61,16 @@ function addItem(e){
     document.getElementById('item1').value = '';
     document.getElementById('item2').value = '';
     document.getElementById('item3').value = '';
+
+    edtbtn.addEventListener('click', function(){
+      document.getElementById('item1').value = Name;
+      document.getElementById('item2').value = email;
+      document.getElementById('item3').value = number;
+    })
 }
+
   function removeitm(e){
-    if(e.target.textContent === 'DELETE'){
+    if(e.target.textContent === 'DELETE' || e.target.textContent === 'EDIT'){
       var li= e.target.parentElement;
       // Get the text content of the li element
       var itemText = li.textContent.trim(); 
@@ -69,5 +83,5 @@ function addItem(e){
       itemlist.removeChild(li);
     }
   }
-
+  
  
