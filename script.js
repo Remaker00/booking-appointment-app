@@ -63,6 +63,10 @@ window.addEventListener("DOMContentLoaded", () => {
       delbtn.appendChild(document.createTextNode('Delete Expense'));
       li.appendChild(delbtn);
 
+      var edtbtn = document.createElement('button');
+      edtbtn.appendChild(document.createTextNode('Edit Expense'));
+      li.appendChild(edtbtn);
+
       itemlist.appendChild(li);
     });
   })
