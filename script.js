@@ -29,7 +29,15 @@ function addItem(e){
       categ: categ
     };
     
-    localStorage.setItem(descrip,JSON.stringify (exp));
+    axios.post("https://crudcrud.com/api/b5835a91e64b4134bdef72b51e5cea62/appointmentData", exp)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        
+    //localStorage.setItem(descrip,JSON.stringify (exp));
   
     document.getElementById('item1').value = '';
     document.getElementById('item2').value = '';
