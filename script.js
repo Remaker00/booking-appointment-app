@@ -63,10 +63,6 @@ window.addEventListener("DOMContentLoaded", () => {
       delbtn.appendChild(document.createTextNode('Delete Expense'));
       li.appendChild(delbtn);
 
-      var edtbtn = document.createElement('button');
-      edtbtn.appendChild(document.createTextNode('Edit Expense'));
-      li.appendChild(edtbtn);
-
       itemlist.appendChild(li);
     });
   })
@@ -78,11 +74,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function removeitm(e){
   if(e.target.textContent === 'Delete Expense' || e.target.textContent === 'Edit Expense'){
-     var li= e.target.parentElement;
-     var itemText = li.textContent.trim(); 
-     var email = itemText.split('-')[1].trim();
-     localStorage.removeItem(email);
-     itemlist.removeChild(li);
+    var li= e.target.parentElement;
+    var objectId = li.getAttribute('id');
+    axios.delete(`https://crudcrud.com/api/b5835a91e64b4134bdef72b51e5cea62/appointmentData/${objectId}`)
+      .then((response) => {
+        console.log(response);
+        itemlist.removeChild(li); 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+     
+     //var itemText = li.textContent.trim(); 
+     //var email = itemText.split('-')[1].trim();
+     //localStorage.removeItem(email);
   }
 }
   
